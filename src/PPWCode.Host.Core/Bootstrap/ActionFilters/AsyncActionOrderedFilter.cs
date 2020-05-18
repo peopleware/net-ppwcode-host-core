@@ -41,6 +41,9 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
         [NotNull]
         public IKernel Kernel { get; }
 
+        /// <inheritdoc />
+        public int Order { get; }
+
         [UsedImplicitly]
         public ILogger Logger
         {
@@ -58,11 +61,6 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
         /// <inheritdoc />
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (Logger.IsInfoEnabled)
-            {
-                Logger.Info($"On Executing filter {GetType().Name} on order {Order}.");
-            }
-
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -71,6 +69,11 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
+            }
+
+            if (Logger.IsInfoEnabled)
+            {
+                Logger.Info($"On Executing filter {GetType().Name} on order {Order}.");
             }
 
             CancellationToken cancellationToken = context.HttpContext.RequestAborted;
@@ -85,9 +88,6 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                 await OnActionExecutedAsync(await next(), cancellationToken);
             }
         }
-
-        /// <inheritdoc />
-        public int Order { get; }
 
         protected abstract Task OnActionExecutedAsync(ActionExecutedContext context, CancellationToken cancellationToken);
 
