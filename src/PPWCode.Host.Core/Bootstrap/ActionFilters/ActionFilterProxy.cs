@@ -19,8 +19,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace PPWCode.Host.Core.Bootstrap.ActionFilters
 {
-    public sealed class ActionFilterProxy<TActionFilter> : IAsyncActionFilter
-        where TActionFilter : class, IAsyncActionFilter
+    public sealed class ActionFilterProxy<TActionFilter>
+        : IAsyncActionFilter,
+          IOrderedFilter
+        where TActionFilter : class, IAsyncActionFilter, IOrderedFilter
     {
         public ActionFilterProxy(
             [NotNull] IKernel kernel,
