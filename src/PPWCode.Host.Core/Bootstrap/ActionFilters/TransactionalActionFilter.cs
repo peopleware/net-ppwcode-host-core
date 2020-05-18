@@ -68,8 +68,7 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                             {
                                 try
                                 {
-                                    Logger.Info("Rollback our request transaction.");
-                                    await OnRollbackAsync(context.HttpContext, cancellationToken);
+                                    await OnRollbackAsync(context.HttpContext);
                                     if (context.HttpContext.Items.ContainsKey(PpwRequestSimulation))
                                     {
                                         Logger.Info("Simulation was requested, a flush is done.");
@@ -78,7 +77,8 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                                 }
                                 finally
                                 {
-                                    await nhTransaction.RollbackAsync(cancellationToken);
+                                    Logger.Info("Rollback our request transaction.");
+                                    await nhTransaction.RollbackAsync();
                                 }
                             }
                             catch (OperationCanceledException)
@@ -92,12 +92,14 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                         }
                         else
                         {
-                            Logger.Info("Flush and commit our request transaction.");
                             try
                             {
                                 await OnCommitAsync(context.HttpContext, cancellationToken);
+
+                                Logger.Info("Flush and commit our request transaction.");
                                 await session.FlushAsync(cancellationToken);
                                 await nhTransaction.CommitAsync(cancellationToken);
+
                                 await OnAfterCommitAsync(context.HttpContext, cancellationToken);
                             }
                             catch (OperationCanceledException)
@@ -106,8 +108,7 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                             }
                             catch (Exception e)
                             {
-                                Logger.Error(
-                                    "While flush and committing our request transaction, something went wrong.", e);
+                                Logger.Error("While flush and committing our request transaction, something went wrong.", e);
                                 try
                                 {
                                     try

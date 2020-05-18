@@ -80,12 +80,13 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
             await OnActionExecutingAsync(context, cancellationToken);
             if (context.Result == null)
             {
+                ActionExecutedContext actionExecutedContext = await next();
                 if (Logger.IsInfoEnabled)
                 {
                     Logger.Info($"On Executed for filter {GetType().Name} on order {Order}.");
                 }
 
-                await OnActionExecutedAsync(await next(), cancellationToken);
+                await OnActionExecutedAsync(actionExecutedContext, cancellationToken);
             }
         }
 
