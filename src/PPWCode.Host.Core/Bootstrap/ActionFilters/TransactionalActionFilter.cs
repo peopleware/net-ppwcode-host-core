@@ -100,6 +100,7 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                             }
                             catch (OperationCanceledException)
                             {
+                                await nhTransaction.RollbackAsync();
                                 throw;
                             }
                             catch (Exception e)
