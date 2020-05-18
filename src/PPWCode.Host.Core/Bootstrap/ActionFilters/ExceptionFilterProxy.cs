@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace PPWCode.Host.Core.Bootstrap.ActionFilters
 {
     public sealed class ExceptionFilterProxy<TExceptionFilter> : IAsyncExceptionFilter
-        where TExceptionFilter : class, IAsyncExceptionFilter
+        where TExceptionFilter : class, IAsyncExceptionFilter, IOrderedFilter
     {
         public ExceptionFilterProxy(
             [NotNull] IKernel kernel,
