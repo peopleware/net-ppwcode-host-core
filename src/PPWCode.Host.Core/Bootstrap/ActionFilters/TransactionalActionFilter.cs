@@ -81,10 +81,6 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                                     await nhTransaction.RollbackAsync();
                                 }
                             }
-                            catch (OperationCanceledException)
-                            {
-                                throw;
-                            }
                             catch (Exception e)
                             {
                                 Logger.Error("While rollback our request transaction, something went wrong.", e);
@@ -113,16 +109,12 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                                 {
                                     try
                                     {
-                                        await OnRollbackAsync(context.HttpContext, cancellationToken);
+                                        await OnRollbackAsync(context.HttpContext);
                                     }
                                     finally
                                     {
-                                        await nhTransaction.RollbackAsync(cancellationToken);
+                                        await nhTransaction.RollbackAsync();
                                     }
-                                }
-                                catch (OperationCanceledException)
-                                {
-                                    throw;
                                 }
                                 catch (Exception e2)
                                 {
@@ -187,7 +179,7 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
         protected virtual Task OnAfterCommitAsync(HttpContext context, CancellationToken cancellationToken)
             => Task.CompletedTask;
 
-        protected virtual Task OnRollbackAsync(HttpContext context, CancellationToken cancellationToken)
+        protected virtual Task OnRollbackAsync(HttpContext context)
             => Task.CompletedTask;
     }
 }
