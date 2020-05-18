@@ -42,13 +42,9 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
         /// <inheritdoc />
         protected override Task OnActionExecutingAsync(ActionExecutingContext context, CancellationToken cancellationToken)
         {
-            if (Logger.IsInfoEnabled)
-            {
-                Logger.Info("Authorization filter");
-            }
-
             if (context.ModelState.IsValid == false)
             {
+                Logger.Info("Our model-state is invalid, building a bad-request result ...");
                 MessageList messageList = new MessageList();
                 List<Message> messages = new List<Message>();
                 foreach (KeyValuePair<string, ModelStateEntry> kv in context.ModelState)
@@ -73,6 +69,10 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
 
                 messageList.Messages = messages.ToArray();
                 context.Result = new BadRequestObjectResult(messageList);
+            }
+            else
+            {
+                Logger.Info("Our model-state is valid.");
             }
 
             return Task.CompletedTask;
