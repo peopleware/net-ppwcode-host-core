@@ -32,7 +32,7 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
 {
     public class TransactionalActionFilter : AsyncActionOrderedFilter
     {
-        private const string NewPhoenixRequestSimulation = "X-NPHX-REQUEST-SIMULATION";
+        public const string RequestSimulation = "X-REQUEST-SIMULATION";
         public const string PpwRequestTransaction = "PPW_nhibernate_transaction";
         public const string PpwRequestSimulation = "PPW_request_simulation";
 
@@ -163,7 +163,7 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                 Kernel.ReleaseComponent(session);
             }
 
-            if (context.HttpContext.Request.Headers.ContainsKey(NewPhoenixRequestSimulation))
+            if (context.HttpContext.Request.Headers.ContainsKey(RequestSimulation))
             {
                 context.HttpContext.Items[PpwRequestSimulation] = "REQUEST-SIMULATION HEADER";
             }
