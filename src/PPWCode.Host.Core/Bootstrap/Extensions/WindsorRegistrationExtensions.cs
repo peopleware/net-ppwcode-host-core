@@ -159,9 +159,11 @@ namespace PPWCode.Host.Core.Bootstrap.Extensions
                           });
             services
                 .AddCustomControllerActivation(
-                    context => container.Resolve(
-                        context.ActionDescriptor.ControllerTypeInfo.AsType(),
-                        Arguments.FromProperties(new { controllerContext = context })),
+                    context =>
+                    {
+                        Arguments arguments = new Arguments().AddNamed("controllerContext", context);
+                        return container.Resolve(context.ActionDescriptor.ControllerTypeInfo.AsType(), arguments);
+                    },
                     (context, o) => container.Release(o));
         }
 

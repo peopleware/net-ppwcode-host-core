@@ -11,7 +11,9 @@
 
 using System.Threading.Tasks;
 
+using Castle.Core;
 using Castle.MicroKernel;
+using Castle.MicroKernel.Context;
 
 using JetBrains.Annotations;
 
@@ -22,6 +24,10 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
     public sealed class ExceptionFilterProxy<TExceptionFilter> : IAsyncExceptionFilter
         where TExceptionFilter : class, IAsyncExceptionFilter, IOrderedFilter
     {
+        private static readonly object _locker = new object();
+        private volatile TExceptionFilter _exceptionFilterInstance;
+        private bool? _canCache;
+
         public ExceptionFilterProxy(
             [NotNull] IKernel kernel,
             int order)
@@ -37,6 +43,45 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
 
         /// <inheritdoc />
         public Task OnExceptionAsync(ExceptionContext context)
-            => Kernel.Resolve<TExceptionFilter>(Arguments.FromProperties(new { order = Order })).OnExceptionAsync(context);
+            => CreateExceptionFilterInstance(Arguments).OnExceptionAsync(context);
+
+        [NotNull]
+        private Arguments Arguments
+            => new Arguments().AddNamed("order", Order);
+
+        [NotNull]
+        private TExceptionFilter CreateExceptionFilterInstance(Arguments arguments)
+        {
+            if (_canCache == false)
+            {
+                return ResolveActionFilter(arguments);
+            }
+
+            if (_exceptionFilterInstance == null)
+            {
+                lock (_locker)
+                {
+                    if (_exceptionFilterInstance == null)
+                    {
+                        IHandler handler = Kernel.GetHandler(typeof(TExceptionFilter));
+                        if (handler.ComponentModel.LifestyleType != LifestyleType.Singleton)
+                        {
+                            _canCache = false;
+                            return ResolveActionFilter(arguments);
+                        }
+
+                        CreationContext creationContext = new CreationContext(handler, Kernel.ReleasePolicy, typeof(TExceptionFilter), Arguments, null, null);
+                        _exceptionFilterInstance = (TExceptionFilter)handler.Resolve(creationContext);
+                        _canCache = true;
+                    }
+                }
+            }
+
+            return _exceptionFilterInstance;
+        }
+
+        [NotNull]
+        private TExceptionFilter ResolveActionFilter(Arguments arguments)
+            => Kernel.Resolve<TExceptionFilter>(arguments);
     }
 }

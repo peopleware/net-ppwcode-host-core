@@ -11,7 +11,9 @@
 
 using System.Threading.Tasks;
 
+using Castle.Core;
 using Castle.MicroKernel;
+using Castle.MicroKernel.Context;
 
 using JetBrains.Annotations;
 
@@ -24,6 +26,10 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
           IOrderedFilter
         where TActionFilter : class, IAsyncActionFilter, IOrderedFilter
     {
+        private static readonly object _locker = new object();
+        private volatile TActionFilter _actionFilterInstance;
+        private bool? _canCache;
+
         public ActionFilterProxy(
             [NotNull] IKernel kernel,
             int order)
@@ -39,6 +45,45 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
 
         /// <inheritdoc />
         public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
-            => Kernel.Resolve<TActionFilter>(Arguments.FromProperties(new { order = Order })).OnActionExecutionAsync(context, next);
+            => CreateActionFilterInstance(Arguments).OnActionExecutionAsync(context, next);
+
+        [NotNull]
+        private Arguments Arguments
+            => new Arguments().AddNamed("order", Order);
+
+        [NotNull]
+        private TActionFilter CreateActionFilterInstance(Arguments arguments)
+        {
+            if (_canCache == false)
+            {
+                return ResolveActionFilter(arguments);
+            }
+
+            if (_actionFilterInstance == null)
+            {
+                lock (_locker)
+                {
+                    if (_actionFilterInstance == null)
+                    {
+                        IHandler handler = Kernel.GetHandler(typeof(TActionFilter));
+                        if (handler.ComponentModel.LifestyleType != LifestyleType.Singleton)
+                        {
+                            _canCache = false;
+                            return ResolveActionFilter(arguments);
+                        }
+
+                        CreationContext creationContext = new CreationContext(handler, Kernel.ReleasePolicy, typeof(TActionFilter), Arguments, null, null);
+                        _actionFilterInstance = (TActionFilter)handler.Resolve(creationContext);
+                        _canCache = true;
+                    }
+                }
+            }
+
+            return _actionFilterInstance;
+        }
+
+        [NotNull]
+        private TActionFilter ResolveActionFilter(Arguments arguments)
+            => Kernel.Resolve<TActionFilter>(arguments);
     }
 }
