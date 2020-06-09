@@ -58,7 +58,7 @@ namespace PPWCode.Host.Core.Bootstrap.Extensions
         public static IServiceProvider AddWindsorIntegration(
             [NotNull] this IServiceCollection services,
             [NotNull] IWindsorContainer container,
-            [CanBeNull] Func<IServiceProvider> serviceProviderFactory = null)
+            [NotNull] Func<IServiceProvider> serviceProviderFactory)
         {
             InstallWindsorIntegration(services, container);
             return InitialiseFrameworkServiceProvider(serviceProviderFactory, container);
