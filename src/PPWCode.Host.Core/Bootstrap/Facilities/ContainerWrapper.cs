@@ -105,7 +105,8 @@ namespace PPWCode.Host.Core.Bootstrap.Facilities
                 AppDomain
                     .CurrentDomain
                     .GetAssemblies()
-                    .Where(a => a.FullName.StartsWith(dllPrefix, StringComparison.OrdinalIgnoreCase));
+                    .Where(a => (a.FullName != null)
+                                && a.FullName.StartsWith(dllPrefix, StringComparison.OrdinalIgnoreCase));
             foreach (Assembly assembly in candidateAssemblies)
             {
                 assemblies.Add(assembly);
