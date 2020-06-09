@@ -45,8 +45,7 @@ namespace PPWCode.Host.Core.Bootstrap.Contributors
 
         public void ProcessModel(IKernel kernel, ComponentModel model)
         {
-            if (model.Configuration.Attributes.Get(AspNetCoreFacility
-                                                       .IsRegisteredAsMiddlewareIntoApplicationBuilderKey) == bool.TrueString)
+            if (model.Configuration.Attributes.Get(AspNetCoreFacility.IsRegisteredAsMiddlewareIntoApplicationBuilderKey) == bool.TrueString)
             {
                 foreach (Type service in model.Services)
                 {

@@ -62,11 +62,13 @@ namespace PPWCode.Host.Core.Bootstrap.Contributors
                     }
                     else if (model.LifestyleType == LifestyleType.Scoped)
                     {
-                        _services.AddScoped(serviceType, p =>
-                                                         {
-                                                             kernel.RequireScope();
-                                                             return kernel.Resolve(serviceType);
-                                                         });
+                        _services.AddScoped(
+                            serviceType,
+                            p =>
+                            {
+                                kernel.RequireScope();
+                                return kernel.Resolve(serviceType);
+                            });
                     }
                     else if (model.LifestyleType == LifestyleType.Singleton)
                     {

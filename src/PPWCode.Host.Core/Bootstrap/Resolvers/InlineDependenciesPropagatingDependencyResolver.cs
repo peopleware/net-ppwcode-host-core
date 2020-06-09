@@ -24,13 +24,8 @@ namespace PPWCode.Host.Core.Bootstrap.Resolvers
         protected override CreationContext RebuildContextForParameter(
             [NotNull] CreationContext current,
             [NotNull] Type parameterType)
-        {
-            if (parameterType.ContainsGenericParameters)
-            {
-                return current;
-            }
-
-            return new CreationContext(parameterType, current, true);
-        }
+            => parameterType.ContainsGenericParameters
+                   ? current
+                   : new CreationContext(parameterType, current, true);
     }
 }
