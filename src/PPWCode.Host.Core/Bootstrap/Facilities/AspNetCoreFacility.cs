@@ -69,12 +69,12 @@ namespace PPWCode.Host.Core.Bootstrap.Facilities
         public void RegistersMiddlewareInto([NotNull] IApplicationBuilder applicationBuilder)
         {
             _middlewareComponentModelContributor =
-                new MiddlewareComponentModelContributor(_crossWiringComponentModelContributor.Services,
-                                                        applicationBuilder);
+                new MiddlewareComponentModelContributor(
+                    _crossWiringComponentModelContributor.Services,
+                    applicationBuilder);
             Kernel
                 .ComponentModelBuilder
-                .AddContributor(
-                    _middlewareComponentModelContributor); // Happens after Init() in Startup.Configure(IApplicationBuilder, ...)
+                .AddContributor(_middlewareComponentModelContributor); // Happens after Init() in Startup.Configure(IApplicationBuilder, ...)
         }
     }
 }
