@@ -30,7 +30,8 @@ namespace PPWCode.Host.Core.Bootstrap.Facilities
 {
     public class ContainerWrapper
     {
-        private static ContainerWrapper _current;
+        private static readonly object _locker = new object();
+        private static volatile ContainerWrapper _current;
 
         private ContainerWrapper()
         {
@@ -49,9 +50,12 @@ namespace PPWCode.Host.Core.Bootstrap.Facilities
             {
                 if (_current == null)
                 {
-                    if (_current == null)
+                    lock (_locker)
                     {
-                        _current = new ContainerWrapper();
+                        if (_current == null)
+                        {
+                            _current = new ContainerWrapper();
+                        }
                     }
                 }
 

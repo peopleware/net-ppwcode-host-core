@@ -24,7 +24,7 @@ using PPWCode.Host.Core.Bootstrap.Resolvers;
 namespace PPWCode.Host.Core.Bootstrap.Facilities
 {
     public class CastleWindsorServiceProviderFactory
-        : IServiceProviderFactory<(ContainerWrapper, IServiceCollection)>
+        : IServiceProviderFactory<IContainerBuilder>
     {
         public CastleWindsorServiceProviderFactory(
             [NotNull] ContainerWrapper containerWrapper,
@@ -55,8 +55,7 @@ namespace PPWCode.Host.Core.Bootstrap.Facilities
         [CanBeNull]
         public Action<IWindsorContainer> OnAfterInstall { get; }
 
-        public (ContainerWrapper, IServiceCollection) CreateBuilder(
-            [NotNull] IServiceCollection services)
+        public IContainerBuilder CreateBuilder([NotNull] IServiceCollection services)
         {
             // install custom controller-activator + request-scoping-middleware
             services.AddWindsorServices(ContainerWrapper.WindsorContainer);
@@ -75,22 +74,19 @@ namespace PPWCode.Host.Core.Bootstrap.Facilities
                     OnBeforeInstall,
                     OnAfterInstall);
 
-            return (ContainerWrapper, services);
+            return new PPWContainerBuilder(ContainerWrapper, services);
         }
 
         [NotNull]
-        public IServiceProvider CreateServiceProvider((ContainerWrapper, IServiceCollection) containerBuilder)
+        public IServiceProvider CreateServiceProvider(IContainerBuilder containerBuilder)
         {
-            ContainerWrapper containerWrapper = containerBuilder.Item1;
-            IServiceCollection services = containerBuilder.Item2;
-
             // ensure that all registrations in IServiceCollection are done,
             // before building the service-provider!
-            ServiceProvider serviceProvider = services.BuildServiceProvider();
+            ServiceProvider serviceProvider = containerBuilder.ServiceCollection.BuildServiceProvider();
 
             // finalize castle windsor integration
             // important for cross-wiring: passing the IServiceProvider
-            services.AddWindsorIntegration(containerWrapper.WindsorContainer, () => serviceProvider);
+            containerBuilder.ServiceCollection.AddWindsorIntegration(containerBuilder.Container.WindsorContainer, () => serviceProvider);
 
             return serviceProvider;
         }
