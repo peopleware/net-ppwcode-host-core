@@ -45,8 +45,8 @@ namespace PPWCode.Host.Core.Bootstrap
                 .AddRequestScopingMiddleware(
                     () => new[]
                           {
-                              container.RequireScope(),
-                              container.Resolve<IServiceProvider>().CreateScope()
+                              container.Resolve<IServiceProvider>().CreateScope(),
+                              container.BeginScope()
                           });
             services
                 .AddCustomControllerActivation(
