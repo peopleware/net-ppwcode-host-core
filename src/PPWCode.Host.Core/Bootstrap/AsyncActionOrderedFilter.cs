@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 using Castle.Core.Logging;
 using Castle.MicroKernel;
+using Castle.Windsor;
 
 using JetBrains.Annotations;
 
@@ -31,10 +32,10 @@ namespace PPWCode.Host.Core.Bootstrap
         private ILogger _logger = NullLogger.Instance;
 
         protected AsyncActionOrderedFilter(
-            [NotNull] IKernel kernel,
+            [NotNull] IWindsorContainer container,
             int order)
         {
-            Kernel = kernel;
+            Kernel = container.Kernel;
             Order = order;
         }
 

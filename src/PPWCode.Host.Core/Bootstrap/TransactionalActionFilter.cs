@@ -15,7 +15,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Castle.MicroKernel;
+using Castle.Windsor;
 
 using JetBrains.Annotations;
 
@@ -38,8 +38,8 @@ namespace PPWCode.Host.Core.Bootstrap
         public const string PpwRequestSimulation = "PPW_request_simulation";
 
         /// <inheritdoc />
-        public TransactionalActionFilter([NotNull] IKernel kernel, int order)
-            : base(kernel, order)
+        public TransactionalActionFilter([NotNull] IWindsorContainer container, int order)
+            : base(container, order)
         {
         }
 

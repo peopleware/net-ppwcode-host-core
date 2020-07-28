@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Castle.MicroKernel;
+using Castle.Windsor;
 
 using JetBrains.Annotations;
 
@@ -28,10 +28,8 @@ namespace PPWCode.Host.Core.Bootstrap
     public class ValidateModelActionFilterAttribute : AsyncActionOrderedFilter
     {
         /// <inheritdoc />
-        public ValidateModelActionFilterAttribute(
-            [NotNull] IKernel kernel,
-            int order)
-            : base(kernel, order)
+        public ValidateModelActionFilterAttribute([NotNull] IWindsorContainer container, int order)
+            : base(container, order)
         {
         }
 

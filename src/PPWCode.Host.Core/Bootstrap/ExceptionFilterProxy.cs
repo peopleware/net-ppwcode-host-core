@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Castle.Core;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Context;
+using Castle.Windsor;
 
 using JetBrains.Annotations;
 
@@ -31,10 +32,10 @@ namespace PPWCode.Host.Core.Bootstrap
         private volatile TExceptionFilter _exceptionFilterInstance;
 
         public ExceptionFilterProxy(
-            [NotNull] IKernel kernel,
+            [NotNull] IWindsorContainer container,
             int order)
         {
-            Kernel = kernel;
+            Kernel = container.Kernel;
             Order = order;
         }
 
