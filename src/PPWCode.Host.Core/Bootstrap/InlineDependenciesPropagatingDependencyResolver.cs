@@ -16,8 +16,16 @@ using Castle.MicroKernel.Resolvers;
 
 using JetBrains.Annotations;
 
-namespace PPWCode.Host.Core.Bootstrap.Resolvers
+namespace PPWCode.Host.Core.Bootstrap
 {
+    /// <inheritdoc />
+    /// <remarks>
+    ///     <para> When creating a <see cref="CreationContext" />, use <c>true</c> for last parameter:</para>
+    ///     <para>
+    ///         When set to <c>true</c> the parent parentContext will be cloned
+    ///         <see cref="P:Castle.MicroKernel.Context.CreationContext.AdditionalArguments" />
+    ///     </para>
+    /// </remarks>
     public class InlineDependenciesPropagatingDependencyResolver : DefaultDependencyResolver
     {
         [NotNull]

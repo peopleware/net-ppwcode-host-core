@@ -28,8 +28,9 @@ using PPWCode.Vernacular.Exceptions.IV;
 
 using ISession = NHibernate.ISession;
 
-namespace PPWCode.Host.Core.Bootstrap.ActionFilters
+namespace PPWCode.Host.Core.Bootstrap
 {
+    /// <inheritdoc />
     public class TransactionalActionFilter : AsyncActionOrderedFilter
     {
         public const string RequestSimulation = "X-REQUEST-SIMULATION";

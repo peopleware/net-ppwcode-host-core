@@ -20,7 +20,7 @@ using JetBrains.Annotations;
 
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace PPWCode.Host.Core.Bootstrap.ActionFilters
+namespace PPWCode.Host.Core.Bootstrap
 {
     /// <inheritdoc cref="IAsyncActionFilter" />
     /// <inheritdoc cref="IOrderedFilter" />
@@ -40,9 +40,6 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
 
         [NotNull]
         public IKernel Kernel { get; }
-
-        /// <inheritdoc />
-        public int Order { get; }
 
         [UsedImplicitly]
         public ILogger Logger
@@ -89,6 +86,9 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
                 await OnActionExecutedAsync(actionExecutedContext, cancellationToken);
             }
         }
+
+        /// <inheritdoc />
+        public int Order { get; }
 
         protected abstract Task OnActionExecutedAsync(ActionExecutedContext context, CancellationToken cancellationToken);
 

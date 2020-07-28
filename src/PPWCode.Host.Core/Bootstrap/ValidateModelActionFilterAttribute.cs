@@ -23,7 +23,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 using PPWCode.API.Core;
 
-namespace PPWCode.Host.Core.Bootstrap.ActionFilters
+namespace PPWCode.Host.Core.Bootstrap
 {
     public class ValidateModelActionFilterAttribute : AsyncActionOrderedFilter
     {

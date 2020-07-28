@@ -19,18 +19,18 @@ using JetBrains.Annotations;
 
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace PPWCode.Host.Core.Bootstrap.ActionFilters
+namespace PPWCode.Host.Core.Bootstrap
 {
-    public sealed class ActionFilterProxy<TActionFilter>
-        : IAsyncActionFilter,
-          IOrderedFilter
-        where TActionFilter : class, IAsyncActionFilter, IOrderedFilter
+    /// <inheritdoc />
+    public sealed class ExceptionFilterProxy<TExceptionFilter> : IAsyncExceptionFilter
+        where TExceptionFilter : class, IAsyncExceptionFilter, IOrderedFilter
     {
+        // ReSharper disable once StaticMemberInGenericType
         private static readonly object _locker = new object();
-        private volatile TActionFilter _actionFilterInstance;
         private bool? _canCache;
+        private volatile TExceptionFilter _exceptionFilterInstance;
 
-        public ActionFilterProxy(
+        public ExceptionFilterProxy(
             [NotNull] IKernel kernel,
             int order)
         {
@@ -43,47 +43,47 @@ namespace PPWCode.Host.Core.Bootstrap.ActionFilters
 
         public int Order { get; }
 
-        /// <inheritdoc />
-        public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
-            => CreateActionFilterInstance(Arguments).OnActionExecutionAsync(context, next);
-
         [NotNull]
         private Arguments Arguments
             => new Arguments().AddNamed("order", Order);
 
+        /// <inheritdoc />
+        public Task OnExceptionAsync(ExceptionContext context)
+            => CreateExceptionFilterInstance(Arguments).OnExceptionAsync(context);
+
         [NotNull]
-        private TActionFilter CreateActionFilterInstance(Arguments arguments)
+        private TExceptionFilter CreateExceptionFilterInstance(Arguments arguments)
         {
             if (_canCache == false)
             {
                 return ResolveActionFilter(arguments);
             }
 
-            if (_actionFilterInstance == null)
+            if (_exceptionFilterInstance == null)
             {
                 lock (_locker)
                 {
-                    if (_actionFilterInstance == null)
+                    if (_exceptionFilterInstance == null)
                     {
-                        IHandler handler = Kernel.GetHandler(typeof(TActionFilter));
+                        IHandler handler = Kernel.GetHandler(typeof(TExceptionFilter));
                         if (handler.ComponentModel.LifestyleType != LifestyleType.Singleton)
                         {
                             _canCache = false;
                             return ResolveActionFilter(arguments);
                         }
 
-                        CreationContext creationContext = new CreationContext(handler, Kernel.ReleasePolicy, typeof(TActionFilter), Arguments, null, null);
-                        _actionFilterInstance = (TActionFilter)handler.Resolve(creationContext);
+                        CreationContext creationContext = new CreationContext(handler, Kernel.ReleasePolicy, typeof(TExceptionFilter), Arguments, null, null);
+                        _exceptionFilterInstance = (TExceptionFilter)handler.Resolve(creationContext);
                         _canCache = true;
                     }
                 }
             }
 
-            return _actionFilterInstance;
+            return _exceptionFilterInstance;
         }
 
         [NotNull]
-        private TActionFilter ResolveActionFilter(Arguments arguments)
-            => Kernel.Resolve<TActionFilter>(arguments);
+        private TExceptionFilter ResolveActionFilter(Arguments arguments)
+            => Kernel.Resolve<TExceptionFilter>(arguments);
     }
 }

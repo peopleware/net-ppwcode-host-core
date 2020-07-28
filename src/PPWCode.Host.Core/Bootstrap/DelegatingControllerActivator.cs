@@ -16,8 +16,9 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
-namespace PPWCode.Host.Core.Bootstrap.Activators
+namespace PPWCode.Host.Core.Bootstrap
 {
+    /// <inheritdoc />
     public class DelegatingControllerActivator : IControllerActivator
     {
         public DelegatingControllerActivator(
@@ -34,9 +35,11 @@ namespace PPWCode.Host.Core.Bootstrap.Activators
         [NotNull]
         public Action<ControllerContext, object> ControllerDestructor { get; }
 
+        /// <inheritdoc />
         public object Create(ControllerContext context)
             => ControllerConstructor(context);
 
+        /// <inheritdoc />
         public void Release(ControllerContext context, object controller)
             => ControllerDestructor(context, controller);
     }

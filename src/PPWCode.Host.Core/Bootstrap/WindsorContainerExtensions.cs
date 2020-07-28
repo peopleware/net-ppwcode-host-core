@@ -20,9 +20,9 @@ using Castle.Windsor;
 
 using JetBrains.Annotations;
 
-namespace PPWCode.Host.Core.Bootstrap.Facilities
+namespace PPWCode.Host.Core.Bootstrap
 {
-    public static class Utilities
+    public static class WindsorContainerExtensions
     {
         public static IKernel AddFacilityConditionally<T>([NotNull] this IKernel kernel, [CanBeNull] Action<T> action = null)
             where T : IFacility, new()

@@ -12,6 +12,10 @@
 using System;
 using System.Collections.Generic;
 
+using Castle.MicroKernel;
+using Castle.MicroKernel.Lifestyle;
+using Castle.Windsor;
+
 using JetBrains.Annotations;
 
 using Microsoft.AspNetCore.Builder;
@@ -20,12 +24,40 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 
-using PPWCode.Host.Core.Bootstrap.Activators;
-
-namespace PPWCode.Host.Core.Bootstrap.Extensions
+namespace PPWCode.Host.Core.Bootstrap
 {
-    internal static class AspNetCoreExtensions
+    public static class AspNetCoreExtensions
     {
+        /// <summary>
+        ///     Sets up framework level activators for Controllers and add scoping
+        /// </summary>
+        /// <param name="services">
+        ///     <see cref="IServiceCollection" />
+        /// </param>
+        /// <param name="container">
+        ///     <see cref="IWindsorContainer" />
+        /// </param>
+        public static void AddAdditionalWindsorServices(
+            [NotNull] this IServiceCollection services,
+            [NotNull] IWindsorContainer container)
+        {
+            services
+                .AddRequestScopingMiddleware(
+                    () => new[]
+                          {
+                              container.RequireScope(),
+                              container.Resolve<IServiceProvider>().CreateScope()
+                          });
+            services
+                .AddCustomControllerActivation(
+                    context =>
+                    {
+                        Arguments arguments = new Arguments().AddNamed("controllerContext", context);
+                        return container.Resolve(context.ActionDescriptor.ControllerTypeInfo.AsType(), arguments);
+                    },
+                    (context, o) => container.Release(o));
+        }
+
         public static void AddCustomControllerActivation(
             [NotNull] this IServiceCollection services,
             [NotNull] Func<ControllerContext, object> resolve,
