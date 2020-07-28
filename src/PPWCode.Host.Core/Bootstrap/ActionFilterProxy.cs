@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Castle.Core;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Context;
+using Castle.Windsor;
 
 using JetBrains.Annotations;
 
@@ -32,19 +33,19 @@ namespace PPWCode.Host.Core.Bootstrap
         private bool? _canCache;
 
         public ActionFilterProxy(
-            [NotNull] IKernel kernel,
+            [NotNull] IWindsorContainer container,
             int order)
         {
-            Kernel = kernel;
+            Container = container;
             Order = order;
         }
 
         [NotNull]
-        public IKernel Kernel { get; }
-
-        [NotNull]
         private Arguments Arguments
             => new Arguments().AddNamed("order", Order);
+
+        [NotNull]
+        public IWindsorContainer Container { get; }
 
         /// <inheritdoc />
         public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
@@ -66,14 +67,21 @@ namespace PPWCode.Host.Core.Bootstrap
                 {
                     if (_actionFilterInstance == null)
                     {
-                        IHandler handler = Kernel.GetHandler(typeof(TActionFilter));
+                        IHandler handler = Container.Kernel.GetHandler(typeof(TActionFilter));
                         if (handler.ComponentModel.LifestyleType != LifestyleType.Singleton)
                         {
                             _canCache = false;
                             return ResolveActionFilter(arguments);
                         }
 
-                        CreationContext creationContext = new CreationContext(handler, Kernel.ReleasePolicy, typeof(TActionFilter), Arguments, null, null);
+                        CreationContext creationContext =
+                            new CreationContext(
+                                handler,
+                                Container.Kernel.ReleasePolicy,
+                                typeof(TActionFilter),
+                                Arguments,
+                                null,
+                                null);
                         _actionFilterInstance = (TActionFilter)handler.Resolve(creationContext);
                         _canCache = true;
                     }
@@ -85,6 +93,6 @@ namespace PPWCode.Host.Core.Bootstrap
 
         [NotNull]
         private TActionFilter ResolveActionFilter(Arguments arguments)
-            => Kernel.Resolve<TActionFilter>(arguments);
+            => Container.Kernel.Resolve<TActionFilter>(arguments);
     }
 }
