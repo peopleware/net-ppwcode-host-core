@@ -37,11 +37,6 @@ namespace PPWCode.Host.Core.Bootstrap
             Order = order;
         }
 
-        public ExceptionFilterProxy([NotNull] IWindsorContainer container)
-            : this(container, 0)
-        {
-        }
-
         [NotNull]
         public IKernel Kernel { get; }
 

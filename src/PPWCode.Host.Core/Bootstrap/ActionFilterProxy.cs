@@ -38,11 +38,6 @@ namespace PPWCode.Host.Core.Bootstrap
             Order = order;
         }
 
-        public ActionFilterProxy([NotNull] IWindsorContainer container)
-            : this(container, 0)
-        {
-        }
-
         [NotNull]
         private Arguments Arguments
             => new Arguments().AddNamed("order", Order);

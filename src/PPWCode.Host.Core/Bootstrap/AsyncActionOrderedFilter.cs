@@ -37,11 +37,6 @@ namespace PPWCode.Host.Core.Bootstrap
             Order = order;
         }
 
-        protected AsyncActionOrderedFilter([NotNull] IWindsorContainer container)
-            : this(container, 0)
-        {
-        }
-
         [NotNull]
         public IKernel Kernel { get; }
 
