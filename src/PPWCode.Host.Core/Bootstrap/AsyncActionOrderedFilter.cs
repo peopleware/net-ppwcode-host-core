@@ -31,12 +31,15 @@ namespace PPWCode.Host.Core.Bootstrap
     {
         private ILogger _logger = NullLogger.Instance;
 
-        protected AsyncActionOrderedFilter(
-            [NotNull] IWindsorContainer container,
-            int order)
+        protected AsyncActionOrderedFilter([NotNull] IWindsorContainer container, int order)
         {
             Kernel = container.Kernel;
             Order = order;
+        }
+
+        protected AsyncActionOrderedFilter([NotNull] IWindsorContainer container)
+            : this(container, 0)
+        {
         }
 
         [NotNull]

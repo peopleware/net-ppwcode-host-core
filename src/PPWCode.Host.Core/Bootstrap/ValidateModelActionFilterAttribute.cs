@@ -25,11 +25,15 @@ using PPWCode.API.Core;
 
 namespace PPWCode.Host.Core.Bootstrap
 {
-    public class ValidateModelActionFilterAttribute : AsyncActionOrderedFilter
+    public class ValidateModelActionFilter : AsyncActionOrderedFilter
     {
-        /// <inheritdoc />
-        public ValidateModelActionFilterAttribute([NotNull] IWindsorContainer container, int order)
+        public ValidateModelActionFilter([NotNull] IWindsorContainer container, int order)
             : base(container, order)
+        {
+        }
+
+        public ValidateModelActionFilter([NotNull] IWindsorContainer container)
+            : base(container, 0)
         {
         }
 

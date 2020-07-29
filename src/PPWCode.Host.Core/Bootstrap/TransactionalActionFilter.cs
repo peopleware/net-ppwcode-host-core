@@ -37,9 +37,13 @@ namespace PPWCode.Host.Core.Bootstrap
         public const string PpwRequestTransaction = "PPW_nhibernate_transaction";
         public const string PpwRequestSimulation = "PPW_request_simulation";
 
-        /// <inheritdoc />
         public TransactionalActionFilter([NotNull] IWindsorContainer container, int order)
             : base(container, order)
+        {
+        }
+
+        public TransactionalActionFilter([NotNull] IWindsorContainer container)
+            : base(container, 0)
         {
         }
 

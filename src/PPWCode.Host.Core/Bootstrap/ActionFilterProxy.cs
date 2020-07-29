@@ -32,12 +32,15 @@ namespace PPWCode.Host.Core.Bootstrap
         private volatile TActionFilter _actionFilterInstance;
         private bool? _canCache;
 
-        public ActionFilterProxy(
-            [NotNull] IWindsorContainer container,
-            int order)
+        public ActionFilterProxy([NotNull] IWindsorContainer container, int order)
         {
             Container = container;
             Order = order;
+        }
+
+        public ActionFilterProxy([NotNull] IWindsorContainer container)
+            : this(container, 0)
+        {
         }
 
         [NotNull]

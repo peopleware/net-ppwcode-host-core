@@ -27,7 +27,7 @@ namespace PPWCode.Host.Core.Bootstrap
         [NotNull]
         public static IWindsorInstaller[] GetAssemblies(
             [NotNull] string dllPrefix,
-            [CanBeNull] InstallerFactory installerFactory)
+            [CanBeNull] InstallerFactory installerFactory = null)
         {
             ISet<Assembly> assemblies = new HashSet<Assembly>();
             Assembly root = Assembly.GetExecutingAssembly();

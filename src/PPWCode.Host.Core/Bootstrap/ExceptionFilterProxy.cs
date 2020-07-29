@@ -31,12 +31,15 @@ namespace PPWCode.Host.Core.Bootstrap
         private bool? _canCache;
         private volatile TExceptionFilter _exceptionFilterInstance;
 
-        public ExceptionFilterProxy(
-            [NotNull] IWindsorContainer container,
-            int order)
+        public ExceptionFilterProxy([NotNull] IWindsorContainer container, int order)
         {
             Kernel = container.Kernel;
             Order = order;
+        }
+
+        public ExceptionFilterProxy([NotNull] IWindsorContainer container)
+            : this(container, 0)
+        {
         }
 
         [NotNull]
