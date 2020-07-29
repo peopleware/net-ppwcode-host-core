@@ -20,8 +20,8 @@
 
   <ItemGroup>
     <!-- PPWCode -->
-    <PackageReference Include="PPWCode.API.Core" Version="1.0.0-rc010009" />
-    <PackageReference Include="PPWCode.Server.Core" Version="1.0.0-rc010034" />
+    <PackageReference Include="PPWCode.API.Core" Version="1.0.0-rc010015" />
+    <PackageReference Include="PPWCode.Server.Core" Version="1.0.0-rc010049" />
 
     <!-- SourceLink -->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
