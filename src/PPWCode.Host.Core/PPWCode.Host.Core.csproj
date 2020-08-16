@@ -21,7 +21,12 @@
   <ItemGroup>
     <!-- PPWCode -->
     <PackageReference Include="PPWCode.API.Core" Version="1.0.0-rc010015" />
-    <PackageReference Include="PPWCode.Server.Core" Version="1.0.0-rc010049" />
+
+    <!-- NHibernate -->
+    <PackageReference Include="NHibernate" Version="5.3.2" />
+
+    <!-- Others -->
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
 
     <!-- SourceLink -->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
