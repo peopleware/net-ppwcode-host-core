@@ -16,7 +16,7 @@ using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 
 using JetBrains.Annotations;
 
-namespace PPWCode.Host.Core.Extensions
+namespace PPWCode.Host.Core.Resolvers
 {
     public class PPWCollectionResolver : CollectionResolver
     {
@@ -38,7 +38,7 @@ namespace PPWCode.Host.Core.Extensions
                 return false;
             }
 
-            return CanResolve(context, contextHandlerResolver, model, dependency);
+            return base.CanResolve(context, contextHandlerResolver, model, dependency);
         }
 
         public override object Resolve(
