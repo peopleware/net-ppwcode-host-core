@@ -50,8 +50,9 @@ namespace PPWCode.Host.Core
                 else
                 {
                     CreateRootContainer();
-                    container = Container;
                 }
+
+                container = Container;
             }
 
             AddSubSystemToContainer(container);
