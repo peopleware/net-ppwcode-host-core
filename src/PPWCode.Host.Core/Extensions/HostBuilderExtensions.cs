@@ -9,10 +9,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 using Castle.Windsor;
-using Castle.Windsor.Extensions.DependencyInjection;
 
 using JetBrains.Annotations;
 
@@ -31,28 +28,6 @@ namespace Microsoft.Extensions.Hosting
 		[NotNull]
 		public static IHostBuilder UsePPWWindsorContainerServiceProvider([NotNull] this IHostBuilder hostBuilder)
 			=> hostBuilder.UseServiceProviderFactory(new PPWWindsorServiceProviderFactory(null));
-
-		/// <summary>
-		/// Uses <see name="IWindsorContainer" /> as the DI container for the host
-		/// </summary>
-		/// <param name="hostBuilder">Host builder</param>
-		/// <param name="factoryArgs">Ctor arguments for the creation of the factory</param>
-		/// <returns>Host builder, creates instance of factory passed as generic</returns>
-		[NotNull]
-		public static IHostBuilder UseWindsorContainerServiceProvider<T>([NotNull] this IHostBuilder hostBuilder, params object[] factoryArgs)
-			where T : WindsorServiceProviderFactoryBase
-			=> hostBuilder.UseServiceProviderFactory((T)Activator.CreateInstance(typeof(T), factoryArgs));
-
-		/// <summary>
-		/// Uses <see name="IWindsorContainer" /> as the DI container for the host
-		/// </summary>
-		/// <param name="hostBuilder">Host builder</param>
-		/// <param name="serviceProviderFactory">Instance of WindsorServiceProviderFactoryBase to be used as ServiceProviderFactory</param>
-		/// <returns>Host builder</returns>
-		[NotNull]
-		public static IHostBuilder UseWindsorContainerServiceProvider<T>([NotNull] this IHostBuilder hostBuilder, [NotNull] T serviceProviderFactory)
-			where T : WindsorServiceProviderFactoryBase
-			=> hostBuilder.UseServiceProviderFactory(serviceProviderFactory);
 
 		/// <summary>
 		/// Uses <see name="IWindsorContainer" /> as the DI container for the host
