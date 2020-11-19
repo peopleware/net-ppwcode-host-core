@@ -32,7 +32,7 @@ namespace PPWCode.Host.Core.Extensions
             throw new Exception("Can not find service: " + typeof(T).AssemblyQualifiedName);
         }
 
-        public static IWindsorContainer CreatePPWContainer([CanBeNull] IServiceCollection serviceCollection)
+        public static IWindsorContainer CreatePPWContainer([CanBeNull] this IServiceCollection serviceCollection)
         {
             IWindsorContainer container =
                 new WindsorContainer(
