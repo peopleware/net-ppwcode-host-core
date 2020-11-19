@@ -1,6 +1,11 @@
 using System;
 using System.Linq;
 
+using Castle.MicroKernel;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using Castle.Windsor.Proxy;
+
 using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +30,19 @@ namespace PPWCode.Host.Core.Extensions
             }
 
             throw new Exception("Can not find service: " + typeof(T).AssemblyQualifiedName);
+        }
+
+        public static IWindsorContainer CreatePPWContainer([CanBeNull] IServiceCollection serviceCollection)
+        {
+            IWindsorContainer container =
+                new WindsorContainer(
+                    new DefaultKernel(
+                        new InlineDependenciesPropagatingDependencyResolver(),
+                        new DefaultProxyFactory()),
+                    new DefaultComponentInstaller());
+            serviceCollection?.AddSingleton(container);
+
+            return container;
         }
     }
 }

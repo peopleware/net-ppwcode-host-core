@@ -24,19 +24,10 @@ namespace Microsoft.Extensions.Hosting
 		/// Uses <see name="IWindsorContainer" /> as the DI container for the host
 		/// </summary>
 		/// <param name="hostBuilder">Host builder</param>
-		/// <returns>Host builder</returns>
-		[NotNull]
-		public static IHostBuilder UsePPWWindsorContainerServiceProvider([NotNull] this IHostBuilder hostBuilder)
-			=> hostBuilder.UseServiceProviderFactory(new PPWWindsorServiceProviderFactory(null));
-
-		/// <summary>
-		/// Uses <see name="IWindsorContainer" /> as the DI container for the host
-		/// </summary>
-		/// <param name="hostBuilder">Host builder</param>
 		/// <param name = "container">Windsor Container to be used for registrations, please note, will be cleared of all existing registrations</param>
 		/// <returns>Host builder</returns>
 		[NotNull]
-		public static IHostBuilder UsePPWWindsorContainerServiceProvider([NotNull] this IHostBuilder hostBuilder, [CanBeNull] IWindsorContainer container)
+		public static IHostBuilder UsePPWWindsorContainerServiceProvider([NotNull] this IHostBuilder hostBuilder, [CanBeNull] IWindsorContainer container = null)
 			=> hostBuilder.UseServiceProviderFactory(new PPWWindsorServiceProviderFactory(container));
     }
 }

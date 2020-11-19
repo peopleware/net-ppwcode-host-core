@@ -20,7 +20,7 @@ using Castle.Windsor.Installer;
 
 using JetBrains.Annotations;
 
-namespace PPWCode.Host.Core.Bootstrap
+namespace PPWCode.Host.Core
 {
     public static class WindsorContainerUtilities
     {

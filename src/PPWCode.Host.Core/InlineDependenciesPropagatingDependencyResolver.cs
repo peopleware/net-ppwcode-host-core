@@ -16,7 +16,7 @@ using Castle.MicroKernel.Resolvers;
 
 using JetBrains.Annotations;
 
-namespace PPWCode.Host.Core.Bootstrap
+namespace PPWCode.Host.Core
 {
     /// <inheritdoc />
     /// <remarks>
