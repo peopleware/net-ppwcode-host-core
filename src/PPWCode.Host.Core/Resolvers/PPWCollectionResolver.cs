@@ -40,12 +40,5 @@ namespace PPWCode.Host.Core.Resolvers
 
             return base.CanResolve(context, contextHandlerResolver, model, dependency);
         }
-
-        public override object Resolve(
-            [NotNull] CreationContext context,
-            [NotNull] ISubDependencyResolver contextHandlerResolver,
-            [NotNull] ComponentModel model,
-            [NotNull] DependencyModel dependency)
-            => kernel.ResolveAll(GetItemType(dependency.TargetItemType), context.AdditionalArguments);
     }
 }
