@@ -47,6 +47,7 @@
     <PackageReleaseNotes>
       <![CDATA[
 1.0.0 Initial release
+1.1.0 Upgrade Castle.Windsor from 5.1.0 -> 5.1.1
       ]]>
     </PackageReleaseNotes>
 
@@ -88,6 +89,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" PrivateAssets="All" />
+    <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>
