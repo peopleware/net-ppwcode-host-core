@@ -49,8 +49,7 @@ namespace PPWCode.Host.Core
                 IEnumerable<string> candidateDirectories =
                     Directory
                         .EnumerateFiles(directoryName)
-                        .Where(x => (x != null)
-                                    && Path.HasExtension(x)
+                        .Where(x => Path.HasExtension(x)
                                     && string.Equals(Path.GetExtension(x), ".dll",
                                                      StringComparison.InvariantCultureIgnoreCase)
                                     && Path.GetFileName(x).StartsWith(dllPrefix, StringComparison.OrdinalIgnoreCase));
