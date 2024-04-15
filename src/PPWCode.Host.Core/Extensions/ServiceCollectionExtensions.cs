@@ -41,7 +41,9 @@ namespace PPWCode.Host.Core.Extensions
                         new DefaultProxyFactory()),
                     new DefaultComponentInstaller());
             serviceCollection?.AddSingleton(container);
-
+#if NET8_0_OR_GREATER
+            serviceCollection?.AddSingleton<IServiceProviderIsService, PPWServiceProviderIsService>();
+#endif
             return container;
         }
     }
