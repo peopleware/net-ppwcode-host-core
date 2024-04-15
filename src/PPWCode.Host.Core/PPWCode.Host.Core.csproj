@@ -19,4 +19,12 @@
     <PackageReference Include="Castle.Windsor" Version="5.1.1" />
     <PackageReference Include="Castle.Windsor.Extensions.DependencyInjection" Version="5.1.1" />
   </ItemGroup>
+
+  <Choose>
+    <When Condition=" '$(TargetFramework)' == 'net8.0' ">
+      <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.*" />
+      </ItemGroup>
+    </When>
+  </Choose>
 </Project>
