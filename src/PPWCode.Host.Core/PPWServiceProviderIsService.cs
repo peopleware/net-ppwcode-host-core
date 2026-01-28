@@ -1,5 +1,4 @@
-#if NET8_0_OR_GREATER
-// Copyright 2024 by PeopleWare n.v..
+// Copyright 2026 by PeopleWare n.v..
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -26,5 +25,3 @@ public sealed class PPWServiceProviderIsService(IWindsorContainer container) : I
     public bool IsService(Type serviceType)
         => Container.Kernel.HasComponent(serviceType);
 }
-
-#endif
