@@ -1,0 +1,5 @@
+name: ppwcode-host-core
+title: PPWCode.Host.Core
+version: ~
+nav:
+- modules/ROOT/nav.adoc
