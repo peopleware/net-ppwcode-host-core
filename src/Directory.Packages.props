@@ -35,8 +35,8 @@
 
         <!-- castle -->
         <PackageVersion Include="Castle.Core" Version="4.*"/>
-        <PackageVersion Include="Castle.Windsor" Version="[5.1.1, 5.1.2]"/>
-        <PackageVersion Include="Castle.Windsor.Extensions.DependencyInjection" Version="[5.1.1, 5.1.2]"/>
+        <PackageVersion Include="Castle.Windsor" Version="5.1.1"/>
+        <PackageVersion Include="Castle.Windsor.Extensions.DependencyInjection" Version="5.1.1"/>
 
         <!-- nunit -->
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />

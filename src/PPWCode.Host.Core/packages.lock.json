@@ -4,7 +4,7 @@
     "net10.0": {
       "Castle.Windsor": {
         "type": "Direct",
-        "requested": "[5.1.1, 5.1.2]",
+        "requested": "[5.1.1, )",
         "resolved": "5.1.1",
         "contentHash": "m1YCo+V+MHUqJV7+KtXlNYig93tEAnPdPevIHi8hVqV8/ceF82Nqe8vS1ROQ25nweTcxYgkrLHwhvJsH2SFwZA==",
         "dependencies": {
@@ -15,7 +15,7 @@
       },
       "Castle.Windsor.Extensions.DependencyInjection": {
         "type": "Direct",
-        "requested": "[5.1.1, 5.1.2]",
+        "requested": "[5.1.1, )",
         "resolved": "5.1.1",
         "contentHash": "lAaRntkx5HztXh/aAmiLaCp3I70ZdjB9h5+osL0xDR/he8+SOXG8C82wNf86802S7QojurM+fSNLaMiiCaXXJg==",
         "dependencies": {
@@ -357,7 +357,7 @@
     "net8.0": {
       "Castle.Windsor": {
         "type": "Direct",
-        "requested": "[5.1.1, 5.1.2]",
+        "requested": "[5.1.1, )",
         "resolved": "5.1.1",
         "contentHash": "m1YCo+V+MHUqJV7+KtXlNYig93tEAnPdPevIHi8hVqV8/ceF82Nqe8vS1ROQ25nweTcxYgkrLHwhvJsH2SFwZA==",
         "dependencies": {
@@ -368,7 +368,7 @@
       },
       "Castle.Windsor.Extensions.DependencyInjection": {
         "type": "Direct",
-        "requested": "[5.1.1, 5.1.2]",
+        "requested": "[5.1.1, )",
         "resolved": "5.1.1",
         "contentHash": "lAaRntkx5HztXh/aAmiLaCp3I70ZdjB9h5+osL0xDR/he8+SOXG8C82wNf86802S7QojurM+fSNLaMiiCaXXJg==",
         "dependencies": {
@@ -710,7 +710,7 @@
     "net9.0": {
       "Castle.Windsor": {
         "type": "Direct",
-        "requested": "[5.1.1, 5.1.2]",
+        "requested": "[5.1.1, )",
         "resolved": "5.1.1",
         "contentHash": "m1YCo+V+MHUqJV7+KtXlNYig93tEAnPdPevIHi8hVqV8/ceF82Nqe8vS1ROQ25nweTcxYgkrLHwhvJsH2SFwZA==",
         "dependencies": {
@@ -721,7 +721,7 @@
       },
       "Castle.Windsor.Extensions.DependencyInjection": {
         "type": "Direct",
-        "requested": "[5.1.1, 5.1.2]",
+        "requested": "[5.1.1, )",
         "resolved": "5.1.1",
         "contentHash": "lAaRntkx5HztXh/aAmiLaCp3I70ZdjB9h5+osL0xDR/he8+SOXG8C82wNf86802S7QojurM+fSNLaMiiCaXXJg==",
         "dependencies": {
