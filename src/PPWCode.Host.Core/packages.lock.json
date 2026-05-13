@@ -51,11 +51,8 @@
       "PPWCode.Vernacular.Contracts.I": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.4.1",
-        "contentHash": "4GlI02Sxovny8zLMbMo3VBVqZDkoVWLSWDSz0hNlpmuy34wRbxFcLWzjyMpx6ps2PXZ35jpPBOMh3+F5VQWyiA==",
-        "dependencies": {
-          "PPWCode.Vernacular.Exceptions.IV": "2.2.1"
-        }
+        "resolved": "1.5.0",
+        "contentHash": "Hv7hjZ+RXEnVkAZEdwlAW5QbT0Hvh+pCusaiQT5bRD93Z58OuMHH6Q48TizzufF6+DRm9rJdnufIcOWWvKLKaw=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
@@ -355,12 +352,6 @@
         "requested": "[13.*, )",
         "resolved": "13.0.4",
         "contentHash": "pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A=="
-      },
-      "PPWCode.Vernacular.Exceptions.IV": {
-        "type": "CentralTransitive",
-        "requested": "[2.*, )",
-        "resolved": "2.2.1",
-        "contentHash": "EnSpiADCKJenktPGhgsDAnsSzbf+HTDq52Wkr2F+58/sanx2rb4//Q68SnYEaOKl/AACQBp+FOKuGih0lYYW0A=="
       }
     },
     "net8.0": {
@@ -413,11 +404,8 @@
       "PPWCode.Vernacular.Contracts.I": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.4.1",
-        "contentHash": "4GlI02Sxovny8zLMbMo3VBVqZDkoVWLSWDSz0hNlpmuy34wRbxFcLWzjyMpx6ps2PXZ35jpPBOMh3+F5VQWyiA==",
-        "dependencies": {
-          "PPWCode.Vernacular.Exceptions.IV": "2.2.1"
-        }
+        "resolved": "1.5.0",
+        "contentHash": "Hv7hjZ+RXEnVkAZEdwlAW5QbT0Hvh+pCusaiQT5bRD93Z58OuMHH6Q48TizzufF6+DRm9rJdnufIcOWWvKLKaw=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
@@ -717,12 +705,6 @@
         "requested": "[13.*, )",
         "resolved": "13.0.4",
         "contentHash": "pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A=="
-      },
-      "PPWCode.Vernacular.Exceptions.IV": {
-        "type": "CentralTransitive",
-        "requested": "[2.*, )",
-        "resolved": "2.2.1",
-        "contentHash": "EnSpiADCKJenktPGhgsDAnsSzbf+HTDq52Wkr2F+58/sanx2rb4//Q68SnYEaOKl/AACQBp+FOKuGih0lYYW0A=="
       }
     },
     "net9.0": {
@@ -775,11 +757,8 @@
       "PPWCode.Vernacular.Contracts.I": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.4.1",
-        "contentHash": "4GlI02Sxovny8zLMbMo3VBVqZDkoVWLSWDSz0hNlpmuy34wRbxFcLWzjyMpx6ps2PXZ35jpPBOMh3+F5VQWyiA==",
-        "dependencies": {
-          "PPWCode.Vernacular.Exceptions.IV": "2.2.1"
-        }
+        "resolved": "1.5.0",
+        "contentHash": "Hv7hjZ+RXEnVkAZEdwlAW5QbT0Hvh+pCusaiQT5bRD93Z58OuMHH6Q48TizzufF6+DRm9rJdnufIcOWWvKLKaw=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
@@ -1079,12 +1058,6 @@
         "requested": "[13.*, )",
         "resolved": "13.0.4",
         "contentHash": "pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A=="
-      },
-      "PPWCode.Vernacular.Exceptions.IV": {
-        "type": "CentralTransitive",
-        "requested": "[2.*, )",
-        "resolved": "2.2.1",
-        "contentHash": "EnSpiADCKJenktPGhgsDAnsSzbf+HTDq52Wkr2F+58/sanx2rb4//Q68SnYEaOKl/AACQBp+FOKuGih0lYYW0A=="
       }
     }
   }
