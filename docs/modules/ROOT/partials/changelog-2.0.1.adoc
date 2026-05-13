@@ -7,11 +7,10 @@ All attributes used, must be included in this file to keep it self-contained.
 This file is translated into markdown and used for the release notes in the GitHub release!
 ////
 
-:ppwcode-docs: https://peopleware.github.io/net-ppwcode-docs/ppwcode-server-core/
-
-=== Fixes
-* DebugType is set to portable
+:ppwcode-docs: https://peopleware.github.io/net-ppwcode-docs/ppwcode-host-core/
 
 === Changes
-* use latest sdk 10.0.201
-* remove upper limit for Castle.Windsor package [5.1.1, 5.1.2] -> [5.1.1, )
+
+* use dotnet sdk `10.0.204`
+* use portable pdbs
+* specify a lower limit only for dependency `Castle.Windsor` (`5.1.1`)
