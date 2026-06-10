@@ -11,6 +11,7 @@ This file is translated into markdown and used for the release notes in the GitH
 
 === Changes
 
-* use dotnet sdk `10.0.204`
+* use dotnet sdk `10.0.301`
 * use portable pdbs
 * specify a lower limit only for dependency `Castle.Windsor` (`5.1.1`)
+* upgrade dependencies
